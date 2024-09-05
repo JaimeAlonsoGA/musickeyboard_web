@@ -5,7 +5,7 @@ import { useSoundProvider } from "../../providers/SoundProvider";
 const MiniKeyboard = () => {
     return (
         <div className="h-16 flex justify-center items-center">
-            <div className="lg:w-min w-full flex flex-row h-full border-2 border-black">
+            <div className="lg:w-min w-full flex flex-row h-full border border-gray-300 rounded-xl">
                 {notes.map((note, i) => (
                     <MiniKeys key={i} i={i} note={note} />))}
             </div>

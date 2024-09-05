@@ -6,7 +6,7 @@ import PressedNotes from "../pressed-notes/PressedNotes";
 const Keymap = () => {
     const { showNoteName } = usePropsProvider();
     return (
-        <div className="flex flex-row justify-center grid grid-cols-3 items-center">
+        <div className="flex flex-row justify-center grid grid-cols-3 items-center font-medium">
             <KeyMap keymap={usedKeysLeft} />
             <div>
                 {showNoteName && <PressedNotes />}
@@ -36,9 +36,9 @@ const KeyMap = ({ keymap }) => {
 const KeyMapKey = ({ keyboard }) => {
     const { octaveLeft, octaveRight, sounding } = useSoundProvider();
     return (
-        <div className={`p-1 bg-gray-400 border-2 border-gray-800 rounded-md text-base ${keyboard.used ? "" : "invisible"}
+        <div className={`p-1 bg-gray-400 border border-gray-300 rounded-xl text-base ${keyboard.used ? "" : "invisible"}
         ${sounding.includes((keymapLeft[keyboard.key] + octaveLeft) || keymapRight[keyboard.key] + octaveRight) ? "" : "shadow-xl"}`}>
-            <div className={`flex items-center justify-center w-4 h-4 p-4 bg-gray-100 rounded-md 
+            <div className={`flex items-center justify-center w-4 h-4 p-4 bg-gray-100 rounded-xl
             ${sounding.includes((keymapLeft[keyboard.key] + octaveLeft) || keymapRight[keyboard.key] + octaveRight) ? "bg-gray-400" : "bg-gray-100"}`}
             >
                 {keyboard.key.toUpperCase()}

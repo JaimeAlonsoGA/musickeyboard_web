@@ -49,17 +49,17 @@ const Key = ({ note, i }) => {
         `}>
                 <div className={
                     `h-4/5 w-full
-                ${note.white ? "bg-white" : "bg-gradient-to-b from-gray-200 to-black to-20%"} 
-                ${sounding.includes(note.id) ? "bg-green-500" : ""}
+                ${note.white ? "" : "bg-black shadow-xl"}
+                ${sounding.includes(note.id) ? "bg-green-500 shadow-none" : ""}
                 `}
                     style={{ padding: `0 ${zoom + 8}px` }}
                 />
-                <div className={`flex justify-center items-center h-1/5 relative ${sounding.includes(note.id) && note.white ? "bg-green-500" : "bg-white"}`}>
+                <div className={`flex justify-center items-center h-1/5 relative ${sounding.includes(note.id) && note.white ? "bg-green-500" : ""}`}>
                     {
                         note.white && <PseudoKey note={note.name} sounding={sounding.includes(note.id)} />
                     }
                     <div className={`w-4 text-center ${zoom < 10 ? "text-xs" : ""}`}>
-                        {isNoteNameVisible && (note.white ? note.name : "")}
+                        <h1 className="text-gray-500">{isNoteNameVisible && (note.white ? note.name : "")}</h1>
                         {showNoteName && !isNoteNameVisible && sounding.includes(note.id) && (note.white ? note.name : "")}
                     </div>
                 </div>
@@ -92,11 +92,14 @@ const PseudoKey = ({ note, sounding }) => {
 
 const PseudoRight = ({ sounding }) =>
     <div className={`absolute -right-1/2 h-full w-1/2 z-10 border-r-2
-        ${sounding ? "bg-green-500" : "bg-white"}`} />
+        ${sounding ? "bg-green-500" : ""}`} />
 
 const PseudoLeft = ({ sounding }) =>
-    <div className={`absolute -left-1/2 h-full w-1/2 z-10 
-         ${sounding ? "bg-green-500" : "bg-white"}`} />
+    <div className={`absolute -left-1/2 h-full w-1/2 z-10
+         ${sounding ? "bg-green-500" : ""}`} />
 
 
 export default Key;
+
+
+//bg-gradient-to-b from-gray-200 to-black to-20% 

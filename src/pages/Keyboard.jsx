@@ -12,7 +12,7 @@ const Keyboard = () => {
     const { isKeymapVisible, isMiniKeyboardVisible, showNoteName } = usePropsProvider();
     const { isLgScreen } = useMediaQueryProvider();
     return (
-        <div className="text-center background">
+        <div className="text-center">
             <div className="flex flex-col mt-10 gap-10">
                 <Title />
                 <Keys />
@@ -38,7 +38,7 @@ const Keyboard = () => {
 
 const Title = () => {
     return (
-        <h1 className="text-4xl text-gray-200 font-bold font-spaceage">
+        <h1 className="text-4xl text-gray-300 font-bold font-spaceage">
             MusicKeyboard.io
         </h1>
     )
@@ -49,7 +49,7 @@ const Keys = () => {
     return (
         <div
             ref={keyboardRef}
-            className="w-full h-64 overflow-x-scroll h-1/2 border-2 border-black hide-scrollbar">
+            className="w-full h-64 overflow-x-scroll h-1/2 border border-gray-300 hide-scrollbar">
             <div className="w-full h-full flex flex-row justify-between">
                 {notes.map((note, i) => (
                     <Key note={note} i={i} key={i} />

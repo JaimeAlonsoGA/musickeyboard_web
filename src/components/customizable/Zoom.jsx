@@ -17,7 +17,7 @@ const Zoom = ({ min, max, text, setter, state, updateVisible }) => {
     };
 
     return (
-        <div className="px-2 border border-gray-500 rounded-md flex flex-row items-center justify-center py-3">
+        <div className="px-2 border border-gray-300 rounded-xl flex flex-row items-center justify-center py-3">
             <div className="flex flex-row items-center mr-8">
                 <MdOutlineZoomIn className="mr-2" size={22} />
                 <h1 className="text-gray-500">{text}</h1>

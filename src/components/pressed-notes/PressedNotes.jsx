@@ -7,7 +7,7 @@ const digitRegex = /\d+/;
 
 const checkChord = (sounding) => {
     if (sounding.length < 3) return;
-    const coordNames = []
+    const chordNames = []
     for (let chord of chords) {
         console.log(chord.notes, sounding);
         if (chord.notes.every((note, i) => {
@@ -16,18 +16,22 @@ const checkChord = (sounding) => {
             return names.includes(note)
         }
         )) {
-            coordNames.push(chord.name);
+            chordNames.push(chord.name);
+            if (chordNames.length > 2) {
+                chordNames.push("...");
+                break;
+            };
         }
     }
 
-    return coordNames.join(" / ");
+    return chordNames.join(" / ");
 }
 
 const PressedNotes = () => {
     const { sounding } = useSoundProvider();
 
     return (
-        <div className="flex flex-col justify-center items-center text-white font-bold">
+        <div className="flex flex-col justify-center items-center font-medium">
             <div className="flex flex-row gap-8">
                 {sounding.map((id, i) => notes.find(note => note.id === id)).sort((a, b) => {
                     console.log(a, b);
@@ -38,7 +42,7 @@ const PressedNotes = () => {
                     );
                 })}
             </div>
-            <div className="border-2 border-gray-500 rounded-xl flex flex-row justify-center items-center mt-4">
+            <div className="border border-gray-300 rounded-xl flex flex-row justify-center items-center mt-4">
                 <div className="p-2">{checkChord(sounding)}</div>
             </div>
         </div>
