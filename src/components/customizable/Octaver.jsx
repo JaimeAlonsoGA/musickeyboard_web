@@ -6,7 +6,7 @@ import { CiCircleChevUp } from "react-icons/ci";
 import { CiCircleChevDown } from "react-icons/ci";
 
 
-const Octaver = ({ min, max, text, setter, setter2, state }) => {
+const Octaver = ({ min, max, text, setter, setter2, state, side }) => {
     const { octavesLocked } = useSoundProvider();
 
     const decrease = () => {
@@ -28,7 +28,7 @@ const Octaver = ({ min, max, text, setter, setter2, state }) => {
     };
 
     return (
-        <div className="px-2 border border-gray-300 rounded-xl flex flex-row items-center justify-center py-3">
+        <div className={`px-2 border border-gray-300 ${side === 1 ? "rounded-l-2xl" : "rounded-r-2xl" } flex flex-row items-center justify-center py-3`}>
             <div className="flex flex-row items-center mr-8">
                 <GiMusicalNotes className="mr-2" size={22} />
                 <h1 className="text-gray-500">{text}</h1>

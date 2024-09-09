@@ -13,8 +13,9 @@ const Keyboard = () => {
     const { isLgScreen } = useMediaQueryProvider();
     return (
         <div className="text-center">
-            <div className="flex flex-col mt-10 gap-10">
+            <div className="flex flex-col mt-4 gap-6">
                 <Title />
+                <div className="w-full h-4 bg-gradient-to-r from-blue-600 to-pink-700"/>
                 <Keys />
             </div>
             <div className="mt-10 flex flex-col gap-2 lg:gap-2 xl:gap-12 items-center">
@@ -38,18 +39,19 @@ const Keyboard = () => {
 
 const Title = () => {
     return (
-        <h1 className="text-4xl text-gray-300 font-bold font-spaceage">
+        <h1 className="text-2xl lg:text-4xl text-gray-300 font-bold font-spaceage">
             MusicKeyboard.io
         </h1>
     )
 }
+
 
 const Keys = () => {
     const { keyboardRef } = usePositionProvider();
     return (
         <div
             ref={keyboardRef}
-            className="w-full h-64 overflow-x-scroll h-1/2 border border-gray-300 hide-scrollbar">
+            className="w-full h-64 overflow-x-scroll h-1/2 border border-gray-300 hide-scrollbar shadow-md">
             <div className="w-full h-full flex flex-row justify-between">
                 {notes.map((note, i) => (
                     <Key note={note} i={i} key={i} />

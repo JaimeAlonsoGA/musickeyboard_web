@@ -5,22 +5,19 @@ import { PropsContextProvider } from './providers/PropsProvider';
 import { SoundContextProvider } from './providers/SoundProvider';
 import { PositionContextProvider } from './providers/PositionProvider';
 import { MediaQueryContextProvider } from './providers/MediaQueryProvider';
-import { ParallaxProvider } from 'react-scroll-parallax';
 
 const App = () => {
   return (
     <MediaQueryContextProvider>
-      <ParallaxProvider>
-        <PositionContextProvider>
-          <SoundContextProvider>
-            <PropsContextProvider>
-              <BrowserRouter>
-                <AppRoutes />
-              </BrowserRouter>
-            </PropsContextProvider>
-          </SoundContextProvider>
-        </PositionContextProvider>
-      </ParallaxProvider>
+      <PositionContextProvider>
+        <SoundContextProvider>
+          <PropsContextProvider>
+            <BrowserRouter>
+              <AppRoutes />
+            </BrowserRouter>
+          </PropsContextProvider>
+        </SoundContextProvider>
+      </PositionContextProvider>
     </MediaQueryContextProvider>
   )
 }

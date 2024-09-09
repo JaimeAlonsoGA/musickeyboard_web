@@ -4,7 +4,6 @@ import { useSoundProvider } from "../../providers/SoundProvider";
 
 const digitRegex = /\d+/;
 
-
 const checkChord = (sounding) => {
     if (sounding.length < 3) return;
     const chordNames = []
@@ -29,6 +28,7 @@ const checkChord = (sounding) => {
 
 const PressedNotes = () => {
     const { sounding } = useSoundProvider();
+    // chords = checkChord(sounding);
 
     return (
         <div className="flex flex-col justify-center items-center font-medium">
@@ -43,7 +43,9 @@ const PressedNotes = () => {
                 })}
             </div>
             <div className="border border-gray-300 rounded-xl flex flex-row justify-center items-center mt-4">
-                <div className="p-2">{checkChord(sounding)}</div>
+                <div className="p-2">
+                    {checkChord(sounding)}
+                </div>
             </div>
         </div>
     );

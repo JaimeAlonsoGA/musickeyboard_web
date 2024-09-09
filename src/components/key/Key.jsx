@@ -1,8 +1,8 @@
-import { useContext, useEffect } from "react";
-import useSound from "use-sound";
+import { useContext, useEffect, useRef } from "react";
 import { PropsContext } from "../../providers/PropsProvider";
 import { useSoundProvider } from "../../providers/SoundProvider";
 import { usePositionProvider } from "../../providers/PositionProvider";
+import { Howl } from 'howler';
 
 // const getNotePadding = (zoom, note) => {
 //     if (note.white) {
@@ -17,24 +17,35 @@ const Key = ({ note, i }) => {
     const { notesRef } = usePositionProvider();
     const { isNoteNameVisible, zoom, showNoteName } = useContext(PropsContext);
     const { playNote, removeNote, sounding } = useSoundProvider();
-    const noteSound = require(`../../assets/notes/${note.id}.mp3`);
-    const [play, { stop, sound }] = useSound(
-        noteSound,
-        {
-            volume: 1,
-            interrupt: true,
-        }
-    );
-
+    const soundRef = useRef(null);
+    // const noteSound = new Howl(`../../assets/notes/${note.id}.mp3`);
+    // const [play, { stop, sound }] = useSound(
+    //     noteSound,
+    //     {
+    //         volume: 1,
+    //         interrupt: true,
+    //     }
+    // );
     useEffect(() => {
-        if (sounding.includes(note.id)) {
-            if (!sound?.playing()) {
-                play();
-            }
+        if (!soundRef.current) {
+            soundRef.current = new Howl({
+                src: [`../../assets/notes/${note.id}.mp3`],
+                volume: 1.0,
+            });
         }
-        else stop();
 
-    }, [sounding])
+        const sound = soundRef.current;
+
+        if (sounding.includes(note.id)) {
+            if (!sound.playing()) {
+                console.log("playing" + note.id);
+                sound.play();
+            }
+        } else {
+            sound.fade(1, 0, 1000);
+        }
+
+    }, [sounding, note.id]);
 
     return (
         <div className="h-full flex flex-col">

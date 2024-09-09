@@ -21,16 +21,16 @@ const Settings = () => {
     return (
         <div className="w-full flex flex-col items-center ">
             <div className="w-full flex flex-row justify-around">
-                {isLgScreen && <Octaver text="Octave Left" min={1} max={7} setter={setOctaveLeft} setter2={setOctaveRight} state={octaveLeft} />}
+                {isLgScreen && <Octaver text="Octave Left" side={1} min={1} max={7} setter={setOctaveLeft} setter2={setOctaveRight} state={octaveLeft} />}
                 <button
                     onClick={() => setIsSettingsVisible(!isSettingsVisible)}
-                    className="flex flex-row border-2 border-gray-500 p-2 rounded-md items-center">
-                    <IoSettings size={22} /> 
+                    className="flex flex-row border border-gray-300 p-2 rounded-l-xl lg:rounded-2xl items-center">
+                    <IoSettings size={22} />
                     <h1 className="px-4">More Settings</h1>
-                    {isSettingsVisible ? <IoMdArrowDropdown size={22} color="gray"/> : <IoMdArrowDropright size={22} color="gray"/>}
+                    {isSettingsVisible ? <IoMdArrowDropdown size={22} color="gray" /> : <IoMdArrowDropright size={22} color="gray" />}
                 </button>
                 <Zoom text="Zoom" min={1} max={30} setter={setZoom} state={zoom} updateVisible={updateVisibleNotes} lock={false} />
-                {isLgScreen && <Octaver text="Octave Right" min={1} max={7} setter={setOctaveRight} setter2={setOctaveLeft} state={octaveRight} />}
+                {isLgScreen && <Octaver text="Octave Right" side={2} min={1} max={7} setter={setOctaveRight} setter2={setOctaveLeft} state={octaveRight} />}
             </div>
             {isSettingsVisible && <Customizable />}
         </div>
