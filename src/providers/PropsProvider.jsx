@@ -13,6 +13,8 @@ export const PropsContextProvider = ({ children }) => {
     const [isKeymapVisible, setIsKeymapVisible] = useState(true);
     const [isMiniKeyboardVisible, setIsMiniKeyboardVisible] = useState(true);
     const [showNoteName, setShowNoteName] = useState(true);
+    // const [ isFocusMode, setIsFocusMode ] = useState(false);
+    // const [ isDarkMode, setIsDarkMode ] = useState(false);
 
     return (
         <PropsContext.Provider value={{ isNoteNameVisible, setIsNoteNameVisible, zoom, setZoom, isKeymapVisible, setIsKeymapVisible, isMiniKeyboardVisible, setIsMiniKeyboardVisible, showNoteName, setShowNoteName }}>

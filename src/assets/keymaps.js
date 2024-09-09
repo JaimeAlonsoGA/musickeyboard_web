@@ -6,13 +6,17 @@ export const keymapLeft = {
     't': 'G',
     'y': 'A',
     'u': 'B',
-    // 'i': 'C',
+    'i': 'C',
+    'o': 'D',
+    'p': 'E',
 
     '2': 'Csharp',
     '3': 'Dsharp',
     '5': 'Fsharp',
     '6': 'Gsharp',
     '7': 'Asharp',
+    '9': 'Csharp',
+    '0': 'Dsharp',
 };
 
 export const keymapRight = {
@@ -23,13 +27,17 @@ export const keymapRight = {
     'v': 'G',
     'b': 'A',
     'n': 'B',
-    // 'm': 'C',
+    'm': 'C',
+    ',': 'D',
+    '.': 'E',
 
     'a': 'Csharp',
     's': 'Dsharp',
     'f': 'Fsharp',
     'g': 'Gsharp',
     'h': 'Asharp',
+    'k': 'Csharp',
+    'l': 'Dsharp',
 };
 
 export const usedKeysLeft = {
@@ -42,7 +50,8 @@ export const usedKeysLeft = {
         { key: '6', used: true },
         { key: '7', used: true },
         { key: '8', used: false },
-
+        { key: '9', used: true },
+        { key: '0', used: true },
     ],
     white: [
         { key: 'q', used: true },
@@ -52,10 +61,9 @@ export const usedKeysLeft = {
         { key: 't', used: true },
         { key: 'y', used: true },
         { key: 'u', used: true },
-        // { key: 'i', used: true },
-
-
-
+        { key: 'i', used: true },
+        { key: 'o', used: true },
+        { key: 'p', used: true },
     ],
 };
 
@@ -68,7 +76,9 @@ export const usedKeysRight = {
         { key: 'v', used: true },
         { key: 'b', used: true },
         { key: 'n', used: true },
-        // { key: 'm', used: true },
+        { key: 'm', used: true },
+        { key: ',', used: true },
+        { key: '.', used: true },
     ],
     black: [
         { key: '>', used: false },
@@ -79,5 +89,7 @@ export const usedKeysRight = {
         { key: 'g', used: true },
         { key: 'h', used: true },
         { key: 'j', used: false },
+        { key: 'k', used: true },
+        { key: 'l', used: true },
     ],
 };

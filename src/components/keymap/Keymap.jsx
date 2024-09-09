@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { keymapLeft, keymapRight, usedKeys, usedKeysLeft, usedKeysRight } from "../../assets/keymaps";
 import { usePropsProvider } from "../../providers/PropsProvider";
 import { useSoundProvider } from "../../providers/SoundProvider";
@@ -17,6 +18,7 @@ const Keymap = () => {
 }
 
 const KeyMap = ({ keymap }) => {
+
     return (
         <div>
             <div className="flex flex-row">
@@ -34,14 +36,37 @@ const KeyMap = ({ keymap }) => {
 }
 
 const KeyMapKey = ({ keyboard }) => {
-    const { octaveLeft, octaveRight, sounding } = useSoundProvider();
+    const { sounding, octaveLeft, octaveRight } = useSoundProvider();
+    const [isPressed, setIsPressed] = useState(false);
+    const key = keyboard.key;
+    const noteLeft = keymapLeft[key];
+    const noteRight = keymapRight[key];
+    const keysToIncreaseOctave = ['i', 'o', 'p', '9', '0', 'm', ',', '.', 'k', 'l'];
+    const KeyMapNoteLeft = keysToIncreaseOctave.includes(key) ? noteLeft + (octaveLeft + 1) : noteLeft + octaveLeft;
+    const KeyMapNoteRight = keysToIncreaseOctave.includes(key) ? noteRight + (octaveRight + 1) : noteRight + octaveRight;
+
+    let noteNameSharp = KeyMapNoteLeft || KeyMapNoteRight;
+    let noteName = '';
+    if (noteNameSharp) {
+        const digitRegex = /\d+/;
+        noteName = noteNameSharp.replace(digitRegex, "").replace("sharp", "#");
+    }
+
+    useEffect(() => {
+        sounding.includes(KeyMapNoteLeft) || sounding.includes(KeyMapNoteRight) ? setIsPressed(true) : setIsPressed(false);
+    }, [sounding]);
+
     return (
-        <div className={`p-1 bg-gray-400 border border-gray-300 rounded-xl text-base ${keyboard.used ? "" : "invisible"}
-        ${sounding.includes((keymapLeft[keyboard.key] + octaveLeft) || keymapRight[keyboard.key] + octaveRight) ? "" : "shadow-xl"}`}>
-            <div className={`flex items-center justify-center w-4 h-4 p-4 bg-gray-100 rounded-xl
-            ${sounding.includes((keymapLeft[keyboard.key] + octaveLeft) || keymapRight[keyboard.key] + octaveRight) ? "bg-gray-400" : "bg-gray-100"}`}
-            >
+        <div className={`p-1 border border-gray-300 rounded-xl text-base ${keyboard.used ? "" : "bg-rose-600 opacity-10"}
+        ${isPressed ? "" : "shadow-xl"}
+        ${noteName.includes("#") ? "bg-gray-400" : "bg-gray-400"}`}>
+            <div className={`flex flex-col items-center justify-center w-4 h-4 p-4 bg-gray-100 rounded-xl
+            ${isPressed ? "bg-gray-400" : "bg-gray-100"}
+            `}>
                 {keyboard.key.toUpperCase()}
+            </div>
+            <div className="text-xs font-normal italic">
+                {noteName}
             </div>
         </div>
     );

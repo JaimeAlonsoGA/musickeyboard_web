@@ -17,23 +17,38 @@ export const SoundContextProvider = ({ children }) => {
 
     // useEffect(() => { console.log("octave left: " + octaveLeft) }, [octaveRight]);
 
+    const octaveCorrection = (key, octave, keymap) => {
+        const keysToIncreaseOctave = ['i', 'o', 'p', '9', '0', 'm', ',', '.', 'k', 'l'];
+        if (keysToIncreaseOctave.includes(key)) {
+            const newOctave = octave + 1;
+            console.log(keymap[key] + newOctave);
+            return keymap[key] + newOctave;
+        } else {
+            console.log(keymap[key] + octave);
+            return keymap[key] + octave;
+        }
+    }
+
     const handleKeyDown = (event) => {
         if (!event.repeat && keymapLeft[event.key]) {
-            const noteLeft = keymapLeft[event.key] + octaveLeft;
+            const noteLeft = octaveCorrection(event.key, octaveLeft, keymapLeft);
             playNote(noteLeft)
-            // console.log("note octave left: " + noteLeft);
         }
         if (!event.repeat && keymapRight[event.key]) {
-            const noteRight = keymapRight[event.key] + octaveRight;
+            const noteRight = octaveCorrection(event.key, octaveRight, keymapRight);
             playNote(noteRight)
         }
     };
 
     const handleKeyUp = (event) => {
-        if (keymapLeft[event.key])
-            removeNote(keymapLeft[event.key] + octaveLeft)
-        if (keymapRight[event.key])
-            removeNote(keymapRight[event.key] + octaveRight)
+        if (keymapLeft[event.key]) {
+            const noteLeft = octaveCorrection(event.key, octaveLeft, keymapLeft);
+            removeNote(noteLeft)
+        }
+        if (keymapRight[event.key]) {
+            const noteRight = octaveCorrection(event.key, octaveRight, keymapRight);
+            removeNote(noteRight)
+        }
     };
 
     const playNote = (name) => { if (name) setSounding(sounding => [...sounding, name]) }

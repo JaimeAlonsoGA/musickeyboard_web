@@ -10,7 +10,7 @@ import { useMediaQueryProvider } from "../providers/MediaQueryProvider";
 
 const Keyboard = () => {
     const { isKeymapVisible, isMiniKeyboardVisible, showNoteName } = usePropsProvider();
-    const { isLgScreen } = useMediaQueryProvider();
+    const { isLgScreen, isXlScreen } = useMediaQueryProvider();
     return (
         <div className="text-center">
             <div className="flex flex-col mt-4 gap-6">
@@ -23,7 +23,7 @@ const Keyboard = () => {
                     <MiniKeyboard />
                 </div>
                 <div className="w-full flex flex-row justify-center items-center h-24">
-                    <div className={`flex justify-center ${isLgScreen ? "" : "hidden"} w-full ${isKeymapVisible ? "" : "hidden"}`}>
+                    <div className={`flex justify-center ${isXlScreen ? "" : "hidden"} w-full ${isKeymapVisible ? "" : "hidden"}`}>
                         <Keymap />
                     </div>
                     {((!isKeymapVisible || !isLgScreen) && showNoteName) &&
