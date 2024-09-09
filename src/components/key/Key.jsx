@@ -3,22 +3,26 @@ import { PropsContext } from "../../providers/PropsProvider";
 import { useSoundProvider } from "../../providers/SoundProvider";
 import { usePositionProvider } from "../../providers/PositionProvider";
 import { Howl } from 'howler';
+import notes from "../../assets/notes";
 
 const Key = ({ note, i }) => {
     const { notesRef } = usePositionProvider();
     const { isNoteNameVisible, zoom, showNoteName } = useContext(PropsContext);
     const { playNote, removeNote, sounding } = useSoundProvider();
-    const [isPlaying, setIsPlaying] = useState(false);
     const soundRef = useRef(null);
-    const audioSrc = `./notes/${note.id}.mp3`;
+    const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
         if (!soundRef.current) {
+            const audioSrc = notes.find(n => n.id === note.id).note;
             soundRef.current = new Howl({
                 src: [audioSrc],
                 volume: 1.0,
-                // onloaderror: (id, error) => console.error(`Failed to load sound for ${note.id}:`, error),
-                // onplayerror: (id, error) => console.error(`Failed to play sound for ${note.id}:`, error),
+                onloaderror: (id, error) => console.error(`Failed to load sound for ${note.id}:`, error),
+                onplayerror: (id, error) => console.error(`Failed to play sound for ${note.id}:`, error),
+                onend: () => {
+                    setIsPlaying(false);
+                },
             });
         }
 
@@ -31,11 +35,11 @@ const Key = ({ note, i }) => {
             }
         } else if (isPlaying) {
             setIsPlaying(false);
-            sound.fade(1, 0, 1500);
+            sound.fade(1, 0, 1000);
             // sound.stop();
         } else sound.stop();
-
-    }, [sounding, note.id]);
+        
+    }, [sounding, isPlaying]);
 
     return (
         <div className="h-full flex flex-col">
