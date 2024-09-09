@@ -54,12 +54,13 @@ const Key = ({ note, i }) => {
         `}>
                 <div className={
                     `h-4/5 w-full
-                ${note.white ? "" : "bg-black shadow-xl"}
-                ${sounding.includes(note.id) ? "bg-green-500 shadow-none" : ""}
+                ${note.white ? "" : "bg-gradient-to-b from-gray-500 to-black to-40% shadow-xl"}
+                ${sounding.includes(note.id) && note.white ? "bg-gradient-to-b from-green-500 to-white to-60% shadow-none" : ""}
+                ${sounding.includes(note.id) && !note.white ? "bg-gradient-to-b from-green-500 to-black to-90% shadow-xs" : ""}
                 `}
                     style={{ padding: `0 ${zoom + 8}px` }}
                 />
-                <div className={`flex justify-center items-center h-1/5 relative ${sounding.includes(note.id) && note.white ? "bg-green-500" : ""}`}>
+                <div className={`flex justify-center items-center h-1/5 relative ${sounding.includes(note.id) && note.white ? "" : ""}`}>
                     {
                         note.white && <PseudoKey note={note.name} sounding={sounding.includes(note.id)} />
                     }
@@ -97,14 +98,17 @@ const PseudoKey = ({ note, sounding }) => {
 
 const PseudoRight = ({ sounding }) =>
     <div className={`absolute -right-1/2 h-full w-1/2 z-10 border-r-2
-        ${sounding ? "bg-green-500" : ""}`} />
+        ${sounding ? "" : ""}`} />
 
 const PseudoLeft = ({ sounding }) =>
     <div className={`absolute -left-1/2 h-full w-1/2 z-10
-         ${sounding ? "bg-green-500" : ""}`} />
+         ${sounding ? "" : ""}`} />
 
 
 export default Key;
 
 
-//bg-gradient-to-b from-gray-200 to-black to-20% 
+// bg-gradient-to-b from-gray-200 to-black to-20% 
+
+//bg-gradient-to-b from-gray-500 to-black to-40% shadow-xl por -- bg-black
+//bg-gradient-to-b from-green-500 to-white to-60% shadow-none -- por nada
