@@ -15,13 +15,13 @@ export const SoundContextProvider = ({ children }) => {
     const [octaveRight, setOctaveRight] = useState(5);
     const [octavesLocked, setOctavesLocked] = useState(true);
 
-    useEffect(() => { console.log("octave left: " + octaveLeft) }, [octaveRight]);
+    // useEffect(() => { console.log("octave left: " + octaveLeft) }, [octaveRight]);
 
     const handleKeyDown = (event) => {
         if (!event.repeat && keymapLeft[event.key]) {
             const noteLeft = keymapLeft[event.key] + octaveLeft;
             playNote(noteLeft)
-            console.log("note octave left: " + noteLeft);
+            // console.log("note octave left: " + noteLeft);
         }
         if (!event.repeat && keymapRight[event.key]) {
             const noteRight = keymapRight[event.key] + octaveRight;

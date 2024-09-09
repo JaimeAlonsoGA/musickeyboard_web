@@ -1,49 +1,39 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { PropsContext } from "../../providers/PropsProvider";
 import { useSoundProvider } from "../../providers/SoundProvider";
 import { usePositionProvider } from "../../providers/PositionProvider";
 import { Howl } from 'howler';
 
-// const getNotePadding = (zoom, note) => {
-//     if (note.white) {
-//         if (note.name == "Re" || note.name == "Sol" || note.name == "La") return zoom * 0.75;
-//         if (note.name == "Do" || note.name == "Fa") return zoom * 1;
-//         if (note.name == "Mi" || note.name == "Si") return zoom * 0.75;
-//     }
-//     else return zoom;
-// }
-
 const Key = ({ note, i }) => {
     const { notesRef } = usePositionProvider();
     const { isNoteNameVisible, zoom, showNoteName } = useContext(PropsContext);
     const { playNote, removeNote, sounding } = useSoundProvider();
+    const [isPlaying, setIsPlaying] = useState(false);
     const soundRef = useRef(null);
-    // const noteSound = new Howl(`../../assets/notes/${note.id}.mp3`);
-    // const [play, { stop, sound }] = useSound(
-    //     noteSound,
-    //     {
-    //         volume: 1,
-    //         interrupt: true,
-    //     }
-    // );
+    const audioSrc = `./notes/${note.id}.mp3`;
+
     useEffect(() => {
         if (!soundRef.current) {
             soundRef.current = new Howl({
-                src: [`../../assets/notes/${note.id}.mp3`],
+                src: [audioSrc],
                 volume: 1.0,
+                // onloaderror: (id, error) => console.error(`Failed to load sound for ${note.id}:`, error),
+                // onplayerror: (id, error) => console.error(`Failed to play sound for ${note.id}:`, error),
             });
         }
 
         const sound = soundRef.current;
 
         if (sounding.includes(note.id)) {
-            if (!sound.playing()) {
-                console.log("playing" + note.id);
+            if (!isPlaying) {
                 sound.play();
+                setIsPlaying(true);
             }
-        } else {
-            sound.fade(1, 0, 1000);
-        }
+        } else if (isPlaying) {
+            setIsPlaying(false);
+            sound.fade(1, 0, 1500);
+            // sound.stop();
+        } else sound.stop();
 
     }, [sounding, note.id]);
 
