@@ -9,14 +9,14 @@ import Settings from "../components/customizable/Settings";
 import { useMediaQueryProvider } from "../providers/MediaQueryProvider";
 
 const Keyboard = () => {
-    const { isKeymapVisible, isMiniKeyboardVisible, showNoteName } = usePropsProvider();
+    const { isKeymapVisible, isMiniKeyboardVisible, showNoteName, scrollbarVisible } = usePropsProvider();
     const { isLgScreen, isXlScreen } = useMediaQueryProvider();
     return (
         <div className="text-center">
             <div className="flex flex-col mt-4 gap-6">
                 <Title />
-                <div className="w-full h-4 bg-gradient-to-r from-blue-600 to-pink-700"/>
-                <Keys />
+                <div className="w-full h-4 bg-gradient-to-r from-blue-600 to-pink-700" />
+                <Keys scrollbarVisible={scrollbarVisible} />
             </div>
             <div className="mt-10 flex flex-col gap-2 lg:gap-2 xl:gap-12 items-center">
                 <div className={`w-full ${isMiniKeyboardVisible ? "" : "invisible"}`}>
@@ -46,12 +46,13 @@ const Title = () => {
 }
 
 
-const Keys = () => {
+const Keys = ({ scrollbarVisible }) => {
     const { keyboardRef } = usePositionProvider();
+
     return (
         <div
             ref={keyboardRef}
-            className="w-full h-64 overflow-x-scroll h-1/2 border border-gray-300 hide-scrollbar shadow-md">
+            className={`w-full h-64 overflow-x-scroll h-1/2 border border-gray-300 ${scrollbarVisible ? "hide-scrollbar" : ""} shadow-md`}>
             <div className="w-full h-full flex flex-row justify-between">
                 {notes.map((note, i) => (
                     <Key note={note} i={i} key={i} />

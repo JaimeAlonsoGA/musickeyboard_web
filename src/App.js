@@ -8,19 +8,25 @@ import { MediaQueryContextProvider } from './providers/MediaQueryProvider';
 
 const App = () => {
   return (
-    <MediaQueryContextProvider>
-      <PositionContextProvider>
-        <SoundContextProvider>
-          <PropsContextProvider>
-            <BrowserRouter>
-              <AppRoutes />
-            </BrowserRouter>
-          </PropsContextProvider>
-        </SoundContextProvider>
-      </PositionContextProvider>
-    </MediaQueryContextProvider>
+    <ProvidersWrapper>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </ProvidersWrapper>
   )
 }
+
+const ProvidersWrapper = ({ children }) => (
+  <MediaQueryContextProvider>
+    <PositionContextProvider>
+      <SoundContextProvider>
+        <PropsContextProvider>
+          {children}
+        </PropsContextProvider>
+      </SoundContextProvider>
+    </PositionContextProvider>
+  </MediaQueryContextProvider>
+)
 
 const AppRoutes = () => (
   <Routes>
