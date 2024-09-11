@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Keyboard from './pages/Keyboard';
 import { PropsContextProvider } from './providers/PropsProvider';
 import { SoundContextProvider } from './providers/SoundProvider';
 import { PositionContextProvider } from './providers/PositionProvider';
 import { MediaQueryContextProvider } from './providers/MediaQueryProvider';
+import Main from './pages/Keyboard';
 
 const App = () => {
   return (
@@ -30,7 +30,7 @@ const ProvidersWrapper = ({ children }) => (
 
 const AppRoutes = () => (
   <Routes>
-    <Route path="/" element={<Keyboard />} />
+    <Route path="/" element={<Main />} />
   </Routes>
 )
 

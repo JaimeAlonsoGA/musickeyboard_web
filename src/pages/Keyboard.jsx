@@ -7,15 +7,26 @@ import { usePositionProvider } from "../providers/PositionProvider";
 import { usePropsProvider } from "../providers/PropsProvider";
 import Settings from "../components/customizable/Settings";
 import { useMediaQueryProvider } from "../providers/MediaQueryProvider";
+import OtherSection from "../components/other/OtherSection";
+import Themes from "../components/themes/themes";
+
+const Main = () => {
+    return (
+        <div>
+            <Keyboard />
+            <OtherSection />
+        </div>
+    )
+}
 
 const Keyboard = () => {
-    const { isKeymapVisible, isMiniKeyboardVisible, showNoteName, scrollbarVisible } = usePropsProvider();
+    const { isKeymapVisible, isMiniKeyboardVisible, showNoteName, scrollbarVisible, theme } = usePropsProvider();
     const { isLgScreen, isXlScreen } = useMediaQueryProvider();
     return (
         <div className="text-center">
             <div className="flex flex-col mt-4 gap-6">
-                <Title />
-                <div className="w-full h-4 bg-gradient-to-r from-blue-600 to-pink-700" />
+                <MainTitle />
+                <Header theme={theme} />
                 <Keys scrollbarVisible={scrollbarVisible} />
             </div>
             <div className="mt-10 flex flex-col gap-2 lg:gap-2 xl:gap-12 items-center">
@@ -32,18 +43,21 @@ const Keyboard = () => {
                         </div>}
                 </div>
                 <Settings />
+                <Themes />
             </div>
         </div >
     );
 }
 
-const Title = () => {
+const MainTitle = () => {
     return (
         <h1 className="text-2xl lg:text-4xl text-gray-300 font-bold font-spaceage">
             MusicKeyboard.io
         </h1>
     )
 }
+
+const Header = ({ theme }) => <div className={`w-full h-4 ${theme.gradient}`} />
 
 
 const Keys = ({ scrollbarVisible }) => {
@@ -62,4 +76,4 @@ const Keys = ({ scrollbarVisible }) => {
     )
 }
 
-export default Keyboard;
+export default Main;

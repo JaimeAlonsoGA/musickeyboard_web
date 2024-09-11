@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import themes from "../assets/themes";
 
 export const PropsContext = createContext();
 
@@ -16,12 +17,20 @@ export const PropsContextProvider = ({ children }) => {
     // const [ isFocusMode, setIsFocusMode ] = useState(false);
     // const [ isDarkMode, setIsDarkMode ] = useState(false);
     const [scrollbarVisible, setScrollbarVisible] = useState(false);
+    const [theme, setTheme] = useState(themes[0]);
+
+    const changeTheme = (themeName) => {
+        const selectedTheme = themes.find(t => t.name === themeName);
+        if (selectedTheme) {
+            setTheme(selectedTheme);
+        }
+    };
 
     return (
         <PropsContext.Provider value={{
             isNoteNameVisible, setIsNoteNameVisible, zoom, setZoom,
             isKeymapVisible, setIsKeymapVisible, isMiniKeyboardVisible, setIsMiniKeyboardVisible,
-            showNoteName, setShowNoteName, scrollbarVisible, setScrollbarVisible
+            showNoteName, setShowNoteName, scrollbarVisible, setScrollbarVisible, changeTheme, theme
         }}>
             {children}
         </PropsContext.Provider>

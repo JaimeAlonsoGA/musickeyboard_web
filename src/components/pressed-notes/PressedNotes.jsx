@@ -10,9 +10,9 @@ const checkChord = (sounding) => {
     for (let chord of chords) {
         console.log(chord.notes, sounding);
         if (chord.notes.every((note, i) => {
-            const names = sounding.map((instance) => instance.replace(digitRegex, "").replace("sharp", "#"));
+            const names = sounding.map((instance) => instance.replace(digitRegex, "").replace("sharp", "♯"));
             console.log("clean", names)
-            return names.includes(note)
+            return names.includes(note);
         }
         )) {
             chordNames.push(chord.name);

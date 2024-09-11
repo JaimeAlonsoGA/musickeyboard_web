@@ -49,7 +49,8 @@ const KeyMapKey = ({ keyboard }) => {
     let noteName = '';
     if (noteNameSharp) {
         const digitRegex = /\d+/;
-        noteName = noteNameSharp.replace(digitRegex, "").replace("sharp", "#");
+        const letterRegex = /[a-zA-Z]+/g;
+        noteName = noteNameSharp.replace(digitRegex, "").replace("sharp", "♯");
     }
 
     useEffect(() => {
