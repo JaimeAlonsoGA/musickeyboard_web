@@ -33,10 +33,10 @@ const WhatIsMusicKeyboard = () => {
                 <div className='flex flex-row mt-12 gap-8'>
                     <img src={icon} alt={"MusicKeyboard.io"} className="w-32" />
                     {/* <a href="https://github.com/JaimeAlonsoGA" target="_blank" rel="noopener noreferrer" className="w-32"> */}
-                    <div className='flex justify-center items-center w-32 rounded-full border cursor-pointer' onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
-                        <img src={dev} alt={"Picture of the developer with sunglasses"} className="w-32" />
+                    <div className='flex justify-center items-center w-32 rounded-full border' onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+                        <img src={dev} alt={"Picture of the developer with sunglasses"} className="w-28" />
                         {/* </a> */}
-                        {isHovering && <h3 className='text-center font-spaceage text-xs font-medium'>Hola Héctor</h3>}
+                        {isHovering && <h3 className='text-center font-spaceage text-xs font-medium'></h3>}
                     </div>
                 </div>
             </div>
@@ -68,6 +68,7 @@ const FrequencyChart = () => {
         <div className='flex flex-col justify-center items-center mt-12'>
             <Title title="Frequency Chart" />
             <Chart />
+            <WhyFreqChart />
         </div>
     )
 }
@@ -75,7 +76,7 @@ const FrequencyChart = () => {
 const Chart = () => {
 
     return (
-        <div className='flex flex-row mt-12 w-full justify-around'>
+        <div className='w-9/12 flex flex-row mt-12 justify-around'>
             <div>
                 <h2>Notes</h2>
                 {notes.map((note, index) => {
@@ -83,7 +84,7 @@ const Chart = () => {
                     const englishNoteName = note.id.replace(digitRegex, "").replace("sharp", "♯");
                     const classicNoteName = note.name.replace("sharp", "");
                     return (
-                        <div key={index} className='p-1 border-b'>
+                        <div key={index} className={`text-center ${classicNoteName === 'La' ? "bg-gradient-to-r from-white via-rose-200 to-white" : ""} p-1 border-b`}>
                             {englishNoteName}
                             {" / " + classicNoteName}
                         </div>
@@ -107,14 +108,32 @@ const Chart = () => {
                 {notes.map((note, index) => {
                     const letterRegex = /[a-zA-Z]+/g;
                     const octave = note.id.replace(letterRegex, "");
+                    const classicNoteName = note.name.replace("sharp", "");
+
                     return (
-                        <div key={index} className='p-1 border-b'>
+                        <div key={index} className={`text-center ${classicNoteName === 'Do' ? "bg-gradient-to-r from-white via-blue-200 to-white" : ""} p-1 border-b`}>
                             {octave}
                         </div>
                     )
                 }
                 )
                 }
+            </div>
+        </div>
+    )
+}
+
+const WhyFreqChart = () => {
+    return (
+        <div className='flex flex-col justify-center items-center mt-12'>
+            <Title title="Why a Frequency Chart?" />
+            <div className='flex flex-col text-justify px-8 my-4 text-justify'>
+                <h2>
+                    The frequency chart is a useful tool to understand the pitch of each note in the piano keyboard. The chart displays the frequency of each note in Hertz (Hz) and its corresponding octave.
+                </h2>
+                <h2>
+                    The frequency of a note is the number of vibrations per second that the sound wave produces. The higher the frequency, the higher the pitch of the note. The frequency chart is a valuable resource for musicians, composers, and music enthusiasts who want to learn more about the science of sound and music theory.
+                </h2>
             </div>
         </div>
     )

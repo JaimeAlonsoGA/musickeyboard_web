@@ -12,41 +12,52 @@ export const useSoundProvider = () => {
 export const SoundContextProvider = ({ children }) => {
     const [sounding, setSounding] = useState([]);
     const [octaveLeft, setOctaveLeft] = useState(4);
-    const [octaveRight, setOctaveRight] = useState(5);
+    const [octaveMiddleLeft, setOctaveMiddleLeft] = useState(5)
+    const [octaveMiddleRight, setOctaveMiddleRight] = useState(5)
+    const [octaveRight, setOctaveRight] = useState(6);
     const [octavesLocked, setOctavesLocked] = useState(true);
 
-    // useEffect(() => { console.log("octave left: " + octaveLeft) }, [octaveRight]);
+    useEffect(() => {console.log("left" + octaveLeft, "middleL" + octaveMiddleLeft, "middleR" + octaveMiddleRight, "right" + octaveRight)}, [octaveMiddleLeft, octaveMiddleRight])
 
-    const octaveCorrection = (key, octave, keymap) => {
-        const keysToIncreaseOctave = ['i', 'o', 'p', '9', '0', 'm', ',', '.', 'k', 'l'];
-        if (keysToIncreaseOctave.includes(key)) {
-            const newOctave = octave + 1;
-            console.log(keymap[key] + newOctave);
-            return keymap[key] + newOctave;
-        } else {
-            console.log(keymap[key] + octave);
-            return keymap[key] + octave;
+    const noteRefinery = (key, octave) => {
+        const letterRegex = /[a-zA-Z]+/;
+        const digitRegex = /\d+/;
+        const note = keymapRight[key] || keymapLeft[key];
+
+        if (!note) {
+            console.error(`Key ${key} not found in keymap` + note);
+            return null;
         }
-    }
+
+        const noteOctave = note.replace(letterRegex, "");
+        const noteRefined = note.replace(digitRegex, "");
+
+        if (noteOctave === '1') return noteRefined + octaveLeft;
+        if (noteOctave === '2') {
+            if (octave === 'left') return noteRefined + octaveMiddleLeft;
+            else return noteRefined + octaveMiddleRight;
+        }
+        if (noteOctave === '3') return noteRefined + octaveRight;
+    };
 
     const handleKeyDown = (event) => {
         if (!event.repeat && keymapLeft[event.key]) {
-            const noteLeft = octaveCorrection(event.key, octaveLeft, keymapLeft);
+            const noteLeft = noteRefinery(event.key, "left");
             playNote(noteLeft)
         }
         if (!event.repeat && keymapRight[event.key]) {
-            const noteRight = octaveCorrection(event.key, octaveRight, keymapRight);
+            const noteRight = noteRefinery(event.key, "right");
             playNote(noteRight)
         }
     };
 
     const handleKeyUp = (event) => {
         if (keymapLeft[event.key]) {
-            const noteLeft = octaveCorrection(event.key, octaveLeft, keymapLeft);
+            const noteLeft = noteRefinery(event.key, octaveLeft, keymapLeft);
             removeNote(noteLeft)
         }
         if (keymapRight[event.key]) {
-            const noteRight = octaveCorrection(event.key, octaveRight, keymapRight);
+            const noteRight = noteRefinery(event.key, octaveRight, keymapRight);
             removeNote(noteRight)
         }
     };
@@ -66,7 +77,7 @@ export const SoundContextProvider = ({ children }) => {
     }, [octaveLeft, octaveRight]);
 
     return (
-        <SoundContext.Provider value={{ playNote, removeNote, sounding, octaveLeft, octaveRight, setOctaveRight, setOctaveLeft, octavesLocked, setOctavesLocked }}>
+        <SoundContext.Provider value={{ playNote, removeNote, sounding, octaveLeft, octaveRight, setOctaveRight, setOctaveLeft, octavesLocked, setOctavesLocked, octaveMiddleLeft, octaveMiddleRight, setOctaveMiddleLeft, setOctaveMiddleRight, noteRefinery }}>
             {children}
         </SoundContext.Provider>
     );
