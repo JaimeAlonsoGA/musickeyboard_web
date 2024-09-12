@@ -57,8 +57,8 @@ const Key = ({ note, i }) => {
                 <div className={
                     `h-4/5 w-full
                 ${note.white ? `${theme.wKeys}` : `${theme.bKeys} shadow-xl`}
-                ${sounding.includes(note.id) && note.white ? "bg-gradient-to-b from-green-500 to-white to-60% shadow-none" : ""}
-                ${sounding.includes(note.id) && !note.white ? "bg-gradient-to-b from-green-500 to-black to-90% shadow-xs" : ""}
+                ${sounding.includes(note.id) && note.white ? `${theme.wPress} shadow-none` : ""}
+                ${sounding.includes(note.id) && !note.white ? `${theme.bPress} shadow-xs` : ""}
                 `}
                     style={{ padding: `0 ${zoom + 8}px` }}
                 />

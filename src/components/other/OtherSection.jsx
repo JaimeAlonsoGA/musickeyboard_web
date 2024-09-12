@@ -1,6 +1,7 @@
 import icon from '../../assets/icon.png';
 import dev from '../../assets/dev.webp';
 import notes from '../../assets/notes';
+import { useState } from 'react';
 
 const OtherSection = () => {
     return (
@@ -20,6 +21,7 @@ const Title = ({ title }) => {
 }
 
 const WhatIsMusicKeyboard = () => {
+    const [isHovering, setIsHovering] = useState(false);
     return (
         <div>
             <Title title="What is MusicKeyboard.io?" />
@@ -30,9 +32,12 @@ const WhatIsMusicKeyboard = () => {
                 </h2>
                 <div className='flex flex-row mt-12 gap-8'>
                     <img src={icon} alt={"MusicKeyboard.io"} className="w-32" />
-                    <a href="https://github.com/JaimeAlonsoGA" target="_blank" rel="noopener noreferrer" className="w-32">
+                    {/* <a href="https://github.com/JaimeAlonsoGA" target="_blank" rel="noopener noreferrer" className="w-32"> */}
+                    <div className='flex justify-center items-center w-32 rounded-full border cursor-pointer' onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
                         <img src={dev} alt={"Picture of the developer with sunglasses"} className="w-32" />
-                    </a>
+                        {/* </a> */}
+                        {isHovering && <h3 className='text-center font-spaceage text-xs font-medium'>Hola Héctor</h3>}
+                    </div>
                 </div>
             </div>
             <Features />

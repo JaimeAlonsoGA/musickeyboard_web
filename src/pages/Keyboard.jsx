@@ -66,7 +66,7 @@ const Keys = ({ scrollbarVisible }) => {
     return (
         <div
             ref={keyboardRef}
-            className={`w-full h-64 overflow-x-scroll h-1/2 border border-gray-300 ${scrollbarVisible ? "hide-scrollbar" : ""} shadow-md`}>
+            className={`w-full h-40 lg:h-64 overflow-x-scroll h-1/2 border border-gray-300 ${scrollbarVisible ? "hide-scrollbar" : ""} shadow-md`}>
             <div className="w-full h-full flex flex-row justify-between">
                 {notes.map((note, i) => (
                     <Key note={note} i={i} key={i} />
