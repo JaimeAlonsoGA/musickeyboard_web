@@ -1,5 +1,7 @@
 import notes from "../../assets/notes";
+import { useMediaQueryProvider } from "../../providers/MediaQueryProvider";
 import { usePositionProvider } from "../../providers/PositionProvider";
+import { usePropsProvider } from "../../providers/PropsProvider";
 import { useSoundProvider } from "../../providers/SoundProvider";
 
 const MiniKeyboard = () => {
@@ -14,15 +16,22 @@ const MiniKeyboard = () => {
 }
 
 const MiniKeys = ({ note, i }) => {
-    const { sounding } = useSoundProvider();
-    const { visibleNotes } = usePositionProvider();
+    const { sounding, keymapKeys } = useSoundProvider();
+    const { visibleNotes, scrollToKey } = usePositionProvider();
+    const { theme } = usePropsProvider();
+    const { isLgScreen } = useMediaQueryProvider();
+
     return (
-        <div className={`w-3
-        ${note.white ? "" : "bg-black h-4/5 text-invisible"}
-        ${sounding.includes(note.id) ? "bg-green-500" : ""}
-        ${(i > visibleNotes.first && i < visibleNotes.last) ? "" : "opacity-30" }
-        `}>
-        </div>
+        <button
+            className={`w-3
+            ${note.white ? "" : "bg-black h-4/5 text-invisible"}
+            ${(keymapKeys.includes(note.id) && note.id.includes("sharp")) && isLgScreen ? `${theme.minikeyboard}` : ""}
+            ${sounding.includes(note.id) ? "bg-gradient-to-b from-green-500 to-green-200" : ""}
+            ${(i > visibleNotes.first && i < visibleNotes.last) ? "" : "opacity-20"}
+            `}
+            onClick={() => scrollToKey(note.id)}
+        >
+        </button>
     );
 }
 

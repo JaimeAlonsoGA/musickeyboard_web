@@ -11,7 +11,7 @@ const checkChord = (sounding) => {
         console.log(chord.notes, sounding);
         if (chord.notes.every((note, i) => {
             const names = sounding.map((instance) => instance.replace(digitRegex, "").replace("sharp", "♯"));
-            console.log("clean", names)
+            // console.log("clean", names)
             return names.includes(note);
         }
         )) {
@@ -28,7 +28,6 @@ const checkChord = (sounding) => {
 
 const PressedNotes = () => {
     const { sounding } = useSoundProvider();
-    // chords = checkChord(sounding);
 
     return (
         <div className="flex flex-col justify-center items-center font-medium">
@@ -37,8 +36,9 @@ const PressedNotes = () => {
                     console.log(a, b);
                     return a.index - b.index;
                 }).map((instance, i) => {
+                    const note = instance?.name;
                     return (
-                        <div key={i}>{instance.name}</div>
+                        <div key={i}>{note}</div>
                     );
                 })}
             </div>

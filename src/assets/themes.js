@@ -8,6 +8,7 @@ const themes = [
         wKeysBot: "",
         wPress: "bg-gradient-to-b from-green-500 to-white to-60%",
         border: "",
+        minikeyboard: "bg-gradient-to-b from-blue-600 to-pink-700",
     },
     {
         name: "Darkpsy",
@@ -18,6 +19,7 @@ const themes = [
         wKeysBot: "bg-rose-600",
         wPress: "bg-gradient-to-b from-green-800 to-rose-600",
         border: "border-gray-800",
+        minikeyboard: "bg-gradient-to-b from-gray-800 to-rose-600",
     },
     {
         name: "Lime",
@@ -28,6 +30,7 @@ const themes = [
         wKeysBot: "bg-gradient-to-b from-yellow-300 to-lime-100",
         wPress: "bg-gradient-to-b from-lime-500 to-yellow-300",
         border: "border-yellow-700",
+        minikeyboard: "bg-gradient-to-b from-lime-500 to-yellow-300",
     },
     {
         name: "Ocean",
@@ -38,6 +41,7 @@ const themes = [
         wKeysBot: "bg-teal-300",
         wPress: "bg-gradient-to-b from-lime-300 to-teal-300",
         border: "border-blue-700",
+        minikeyboard: "bg-gradient-to-b from-blue-700 to-teal-500",
     },
     {
         name: "Ice",
@@ -48,6 +52,7 @@ const themes = [
         wKeysBot: "bg-white",
         wPress: "bg-gradient-to-b from-lime-200 to-white",
         border: "border-blue-300",
+        minikeyboard: "bg-gradient-to-b from-blue-300 to-white",
     },
     {
         name: "Clavecin",
@@ -58,6 +63,7 @@ const themes = [
         wKeysBot: "bg-black",
         wPress: "bg-gradient-to-b from-gray-300 to-black",
         border: "border-gray-300",
+        minikeyboard: "bg-gradient-to-b from-white to-gray-300",
     },
     {
         name: "Lavender",
@@ -68,6 +74,7 @@ const themes = [
         wKeysBot: "bg-pink-100",
         wPress: "bg-gradient-to-b from-lime-200 to-pink-100",
         border: "border-purple-300",
+        minikeyboard: "bg-gradient-to-b from-purple-300 to-pink-300",
     },
     {
         name: "Future",
@@ -78,6 +85,7 @@ const themes = [
         wKeysBot: "bg-gray-600",
         wPress: "bg-gradient-to-b from-lime-300 to-gray-600",
         border: "border-gray-300",
+        minikeyboard: "bg-gradient-to-b from-gray-300 to-white",
     },
     {
         name: "Sunset",
@@ -88,6 +96,7 @@ const themes = [
         wKeysBot: "bg-orange-100",
         wPress: "bg-gradient-to-b from-lime-200 to-orange-100",
         border: "border-red-700",
+        minikeyboard: "bg-gradient-to-b from-red-500 to-orange-500",
     },
     {
         name: "Latex",
@@ -98,6 +107,7 @@ const themes = [
         wKeysBot: "bg-white",
         wPress: "bg-gradient-to-b from-lime-200 to-white",
         border: "border-gray-300",
+        minikeyboard: "bg-gradient-to-b from-gray-300 to-white",
     },
     {
         name: "Emerald",
@@ -108,6 +118,7 @@ const themes = [
         wKeysBot: "bg-teal-100",
         wPress: "bg-gradient-to-b from-lime-200 to-teal-100",
         border: "border-green-500",
+        minikeyboard: "bg-gradient-to-b from-green-500 to-teal-500",
     },
 ];
 

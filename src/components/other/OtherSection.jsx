@@ -25,16 +25,16 @@ const WhatIsMusicKeyboard = () => {
     return (
         <div>
             <Title title="What is MusicKeyboard.io?" />
-            <div className="flex flex-col text-justify px-8 my-4 items-center">
+            <div className="flex flex-col text-justify px-24 my-4 items-center">
                 <h2>
                     Developed by Jaime Alonso, MusicKeyboard.io is a free online platform where you can play the piano as in the most minimalistic way possible. Whether you're a beginner composer or an experienced musician, our virtual keyboard with realistic piano sound offers an intuitive and interactive way to practice and enjoy music.
                     Benefit from our chords database, notes tracking, and intuitive keymap. Play music online without the need to download any software. Explore various features, including a frequency chart, custom settings for the music keyboard, and a variety of color themes. Play anywhere, anytime!
                 </h2>
                 <div className='flex flex-row mt-12 gap-8'>
-                    <img src={icon} alt={"MusicKeyboard.io"} className="w-32" />
+                    <img src={icon} alt={"MusicKeyboard.io"} className="w-24" />
                     {/* <a href="https://github.com/JaimeAlonsoGA" target="_blank" rel="noopener noreferrer" className="w-32"> */}
-                    <div className='flex justify-center items-center w-32 rounded-full border' onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
-                        <img src={dev} alt={"Picture of the developer with sunglasses"} className="w-28" />
+                    <div className='flex justify-center items-center w-24 p-1 rounded-full border' onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+                        <img src={dev} alt={"Picture of the developer with sunglasses"} className="w-24" />
                         {/* </a> */}
                         {isHovering && <h3 className='text-center font-spaceage text-xs font-medium'></h3>}
                     </div>
@@ -51,9 +51,12 @@ const Features = () => (
             <Title title="Features" />
             <div className='mt-12'>
                 {features.map((feature, index) => (
-                    <div className='text-left'>
+                    <div className='text-left' key={index}>
                         <h2 className="py-2 text-lg">
                             {"⦿ " + feature.f}
+                            {feature.f === "Auto-scrolling" && <span className='text-xs bg-green-300 rounded-xl p-1 ml-4'>🎉 new 1.0.2</span>}
+                            {feature.f === "Chords database" && <span className='text-xs bg-green-300 rounded-xl p-1 ml-4'>🎉 new 1..0.2</span>}
+                            {feature.f === "Frequency chart" && <span className='text-xs bg-blue-200 rounded-xl p-1 ml-4'>See Bellow</span>}
                         </h2>
                         <h3 className='font-light text-md'>{feature.c}</h3>
                     </div>
@@ -127,12 +130,12 @@ const WhyFreqChart = () => {
     return (
         <div className='flex flex-col justify-center items-center mt-12'>
             <Title title="Why a Frequency Chart?" />
-            <div className='flex flex-col text-justify px-8 my-4 text-justify'>
+            <div className='flex flex-col text-justify px-24 my-4 text-justify'>
                 <h2>
                     The frequency chart is a useful tool to understand the pitch of each note in the piano keyboard. The chart displays the frequency of each note in Hertz (Hz) and its corresponding octave.
                 </h2>
                 <h2>
-                    The frequency of a note is the number of vibrations per second that the sound wave produces. The higher the frequency, the higher the pitch of the note. The frequency chart is a valuable resource for musicians, composers, and music enthusiasts who want to learn more about the science of sound and music theory.
+                    The frequency of a note is the number of vibrations per second that the sound wave produces. The higher the frequency, the higher the pitch of the note. The frequency chart is a valuable resource for music producers, composers, and musicians who want to learn more about the science of sound and music theory.
                 </h2>
             </div>
         </div>
@@ -176,6 +179,14 @@ const features = [
     {
         f: "Suitable on portable devices",
         c: "Use MusicKeyboard.io on your smartphone or tablet",
+    },
+    {
+        f: "Free to use",
+        c: "Play the piano online without downloading any software",
+    },
+    {
+        f: "Auto-scrolling",
+        c: "Keep the notes you are playing in view with the auto-scrolling feature",
     }
 ]
 

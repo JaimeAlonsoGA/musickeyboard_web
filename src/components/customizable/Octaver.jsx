@@ -6,17 +6,23 @@ import { CiCircleChevUp } from "react-icons/ci";
 import { CiCircleChevDown } from "react-icons/ci";
 
 
-const Octaver = ({ min, max, text, setter, setter2, state, side, middleOctave }) => {
-    const { octavesLocked } = useSoundProvider();
+const Octaver = ({ min, max, text, setter, setter2, state, side, middleOctave, middleOctave2 }) => {
+    const { octavesLocked, setKeymapKeys } = useSoundProvider();
 
     const decrease = () => {
         if (state >= max) return;
         if (octavesLocked) {
             setter(state + 1);
             middleOctave(prev => prev + 1);
+            middleOctave2(prev => prev + 1);
             setter2(prev => prev + 1);
+            setKeymapKeys([]);
         }
-        else setter(state + 1);
+        else {
+            setter(state + 1);
+            middleOctave(prev => prev + 1);
+            setKeymapKeys([]);
+        };
     };
 
     const increment = () => {
@@ -24,13 +30,19 @@ const Octaver = ({ min, max, text, setter, setter2, state, side, middleOctave })
         if (octavesLocked) {
             setter(state - 1);
             middleOctave(prev => prev - 1);
+            middleOctave2(prev => prev - 1);
             setter2(prev => prev - 1);
+            setKeymapKeys([]);
         }
-        else setter(state - 1);
+        else {
+            setter(state - 1);
+            middleOctave(prev => prev + 1);
+            setKeymapKeys([]);
+        }
     };
 
     return (
-        <div className={`px-2 border border-gray-300 ${side === 1 ? "rounded-l-2xl" : "rounded-r-2xl"} flex flex-row items-center justify-center py-3`}>
+        <div className={`px-2 border border-gray-300 rounded-xl flex flex-row items-center justify-center py-3`}>
             <div className="flex flex-row items-center mr-8">
                 <GiMusicalNotes className="mr-2" size={22} />
                 <h1 className="text-gray-500">{text}</h1>
@@ -40,11 +52,11 @@ const Octaver = ({ min, max, text, setter, setter2, state, side, middleOctave })
                     onClick={increment}>
                     <CiCircleChevDown size={20} />
                 </button>
-                <h1 className="text-gray-500 px-4">{state}</h1>
+                <h1 className="text-gray-500 px-4">{state - 3}</h1>
                 <button onClick={decrease}>
                     <CiCircleChevUp size={20} />
                 </button>
-                <Lock />
+                {/* <Lock /> */}
             </div>
         </div>
     );

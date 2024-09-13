@@ -11,13 +11,15 @@ export const usePropsProvider = () => {
 export const PropsContextProvider = ({ children }) => {
     const [isNoteNameVisible, setIsNoteNameVisible] = useState(false);
     const [zoom, setZoom] = useState(15);
-    const [isKeymapVisible, setIsKeymapVisible] = useState(true);
+    const [isKeymapVisible, setIsKeymapVisible] = useState(false);
     const [isMiniKeyboardVisible, setIsMiniKeyboardVisible] = useState(true);
     const [showNoteName, setShowNoteName] = useState(true);
     // const [ isFocusMode, setIsFocusMode ] = useState(false);
     // const [ isDarkMode, setIsDarkMode ] = useState(false);
     const [scrollbarVisible, setScrollbarVisible] = useState(false);
     const [theme, setTheme] = useState(themes[0]);
+    const [notation, setNotation] = useState(true);
+    const [keymapOnKey, setKeymapOnKey] = useState(true);
 
     const changeTheme = (themeName) => {
         const selectedTheme = themes.find(t => t.name === themeName);
@@ -30,7 +32,8 @@ export const PropsContextProvider = ({ children }) => {
         <PropsContext.Provider value={{
             isNoteNameVisible, setIsNoteNameVisible, zoom, setZoom,
             isKeymapVisible, setIsKeymapVisible, isMiniKeyboardVisible, setIsMiniKeyboardVisible,
-            showNoteName, setShowNoteName, scrollbarVisible, setScrollbarVisible, changeTheme, theme
+            showNoteName, setShowNoteName, scrollbarVisible, setScrollbarVisible, changeTheme, theme,
+            notation, setNotation, keymapOnKey, setKeymapOnKey
         }}>
             {children}
         </PropsContext.Provider>

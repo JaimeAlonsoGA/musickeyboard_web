@@ -9,12 +9,14 @@ import Settings from "../components/customizable/Settings";
 import { useMediaQueryProvider } from "../providers/MediaQueryProvider";
 import OtherSection from "../components/other/OtherSection";
 import Themes from "../components/themes/themes";
+import Footer from "../components/footer/Footer";
 
 const Main = () => {
     return (
         <div>
             <Keyboard />
             <OtherSection />
+            <Footer />
         </div>
     )
 }

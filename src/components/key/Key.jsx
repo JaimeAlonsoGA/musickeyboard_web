@@ -4,14 +4,63 @@ import { useSoundProvider } from "../../providers/SoundProvider";
 import { usePositionProvider } from "../../providers/PositionProvider";
 import { Howl } from 'howler';
 import notes from "../../assets/notes";
+import { keymapLeft, keymapRight } from "../../assets/keymaps";
+import { useMediaQueryProvider } from "../../providers/MediaQueryProvider";
 
 const Key = ({ note, i }) => {
-    const { notesRef } = usePositionProvider();
+    const { notesRef, AutoScroll, isAutoScroll } = usePositionProvider();
     const { isNoteNameVisible, zoom, showNoteName } = useContext(PropsContext);
-    const { playNote, removeNote, sounding } = useSoundProvider();
-    const { theme } = usePropsProvider();
-    const soundRef = useRef(null);
+    const { playNote, removeNote, sounding, keymapKeys, octaveLeft, octaveMiddleLeft, octaveMiddleRight, octaveRight } = useSoundProvider();
+    const { theme, notation, keymapOnKey } = usePropsProvider();
+    const { isLgScreen } = useMediaQueryProvider();
     const [isPlaying, setIsPlaying] = useState(false);
+    const [noteName, setNoteName] = useState("");
+    const [isKeymapOnKey, setIsKeymapOnKey] = useState(false);
+    const soundRef = useRef(null);
+
+    const noteClassic = note.name;
+    const noteEnglish = note.id.replace("sharp", "#");
+
+    const mapRefinery = (note) => {
+        const letterRegex = /[a-zA-Z]+/;
+        const digitRegex = /\d+/;
+        const octave = note.replace(letterRegex, "");
+        // console.log("note octave" + octave, "octave Left" + octaveLeft);
+        if (octave == octaveLeft) {
+            const refined = note.replace(digitRegex, "1");
+            return refined;
+        }
+        if (octave == octaveMiddleLeft || octave == octaveMiddleRight) {
+            const refined = note.replace(digitRegex, "2");
+            console.log("note refined" + refined);
+            return refined;
+        }
+        if (octave == octaveRight) {
+            const refined = note.replace(digitRegex, "3");
+            return refined;
+        }
+        else return null;
+    }
+
+    const findKeyByValue = (obj, value) => {
+        return Object.keys(obj).find(key => obj[key] === value);
+    };
+
+    const mapRefined = mapRefinery(note.id);
+
+    let key;
+    if (Object.values(keymapLeft).includes(mapRefined)) {
+        key = findKeyByValue(keymapLeft, mapRefined).toUpperCase();
+    }
+    if (Object.values(keymapRight).includes(mapRefined)) {
+        key = findKeyByValue(keymapRight, mapRefined).toUpperCase();
+    }
+
+    useEffect(() => { keymapKeys.includes(note.id) ? setIsKeymapOnKey(true) : setIsKeymapOnKey(false); }, [keymapKeys]);
+
+    useEffect(() => {
+        notation ? setNoteName(noteClassic) : setNoteName(noteEnglish);
+    }, [notation]);
 
     useEffect(() => {
         if (!soundRef.current) {
@@ -33,6 +82,7 @@ const Key = ({ note, i }) => {
             if (!isPlaying) {
                 sound.play();
                 setIsPlaying(true);
+                if (isAutoScroll) AutoScroll(note.id);
             }
         } else if (isPlaying) {
             setIsPlaying(false);
@@ -52,7 +102,7 @@ const Key = ({ note, i }) => {
                 onMouseLeave={() => removeNote(note.id)}
                 onTouchStart={() => playNote(note.id)}
                 onTouchEnd={() => removeNote(note.id)}
-                className={`h-full w-full ${note.name === "Mi" || note.name === "Si" ? `border-r-2 ${theme.border}` : ""}
+                className={`h-full w-full ${noteClassic === "Mi" || noteClassic === "Si" ? `border-r-2 ${theme.border}` : ""}
         `}>
                 <div className={
                     `h-4/5 w-full
@@ -64,12 +114,18 @@ const Key = ({ note, i }) => {
                 />
                 <div className={`flex justify-center items-center h-1/5 relative ${theme.wKeysBot} ${sounding.includes(note.id) && note.white ? `` : ""}`}>
                     {
-                        note.white && <PseudoKey note={note.name} sounding={sounding.includes(note.id)} theme={theme}/>
+                        note.white && <PseudoKey note={noteClassic} sounding={sounding.includes(note.id)} theme={theme} />
                     }
                     <div className={`w-4 text-center ${zoom < 10 ? "text-xs" : ""}`}>
-                        <h1 className="text-gray-500">{isNoteNameVisible && (note.white ? note.name : "")}</h1>
-                        {showNoteName && !isNoteNameVisible && sounding.includes(note.id) && (note.white ? note.name : "")}
+                        <h1 className="text-gray-500">{isNoteNameVisible && (note.white ? noteName : "")}</h1>
+                        {showNoteName && !isNoteNameVisible && sounding.includes(note.id) && (note.white ? noteName : "")}
                     </div>
+                    {isLgScreen && <div className="absolute mb-48 font-mono text-sm font-bold">
+                        {keymapOnKey && !isPlaying && isKeymapOnKey && note.white && key}
+                    </div>}
+                    {isLgScreen && <div className="absolute mb-60 font-mono text-sm text-white font-bold">
+                        {keymapOnKey && !isPlaying && isKeymapOnKey && !note.white && key}
+                    </div>}
                 </div>
             </button>
         </div>

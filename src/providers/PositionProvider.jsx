@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
+import notes from "../assets/notes";
 
 const PositionContext = createContext();
 
@@ -12,6 +13,7 @@ export const PositionContextProvider = ({ children }) => {
     const [visibleNotes, setVisibleNotes] = useState({ first: null, last: null });
     const notesRef = useRef([]);
     const keyboardRef = useRef(null);
+    const [isAutoScroll, setIsAutoScroll] = useState(true);
 
     const updateVisibleNotes = () => {
         const visiblesTemp = {
@@ -22,7 +24,7 @@ export const PositionContextProvider = ({ children }) => {
             const rect = note.getBoundingClientRect();
             if (rect.left >= 0 && rect.right <= window.innerWidth) {
                 if (!visiblesTemp.first) {
-                    visiblesTemp.first = i -1;
+                    visiblesTemp.first = i - 1;
                 }
                 else {
                     visiblesTemp.last = i + 1;
@@ -34,7 +36,20 @@ export const PositionContextProvider = ({ children }) => {
 
         setVisibleNotes(visiblesTemp);
     }
-    
+
+    const scrollToKey = (noteId) => {
+        const keyIndex = notes.findIndex(note => note.id === noteId);
+        if (keyIndex !== -1 && notesRef.current[keyIndex]) {
+            notesRef.current[keyIndex].scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    };
+
+    const AutoScroll = (noteId) => {
+        const keyIndex = notes.findIndex(note => note.id === noteId);
+        if (keyIndex !== -1 && notesRef.current[keyIndex]) {
+            notesRef.current[keyIndex].scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    }
 
     useEffect(() => {
         console.log("visible notes: ", visibleNotes);
@@ -53,7 +68,7 @@ export const PositionContextProvider = ({ children }) => {
     }, []);
 
     return (
-        <PositionContext.Provider value={{ visibleNotes, notesRef, keyboardRef, updateVisibleNotes }}>
+        <PositionContext.Provider value={{ visibleNotes, notesRef, keyboardRef, updateVisibleNotes, scrollToKey, AutoScroll, isAutoScroll, setIsAutoScroll }}>
             {children}
         </PositionContext.Provider>
     );

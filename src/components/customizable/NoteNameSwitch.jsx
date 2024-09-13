@@ -5,16 +5,17 @@ const HANDLE_DIAMETER_PX = 15;
 const SWITCH_OFFSET_PX = 1.5;
 
 const Switch = ({
-    containerCheckedColor = "#444",
-    containerUncheckedColor = "#222",
+    containerCheckedColor = "green",
+    containerUncheckedColor = "gray",
     handleCheckedColor = "white",
     handleUncheckedColor = "white",
     text,
     setter,
     state,
+    type,
 }) => {
     return (
-        <div className="w-full flex flex-row items-center px-12 justify-between">
+        <div className={`${type === 1 ? "bg-gray-300" : ""} py-2 w-full flex flex-row items-center px-12 justify-between`}>
             <div className="w-4/5">
                 <h1 className="text-gray-500">{text}</h1>
             </div>

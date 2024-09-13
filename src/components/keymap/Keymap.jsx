@@ -36,17 +36,19 @@ const KeyMap = ({ keymap }) => {
 }
 
 const KeyMapKey = ({ keyboard, octave }) => {
-    const { sounding, noteRefinery } = useSoundProvider();
+    const { sounding, noteRefinery, setKeymapKeys } = useSoundProvider();
     const [isPressed, setIsPressed] = useState(false);
     const key = keyboard.key;
 
     const note = noteRefinery(key, octave);
 
+    useEffect(() => { setKeymapKeys(prev => [...prev, note]) }, [note]);
+
     let noteRefined;
     if (note) {
         noteRefined = note.replace(/\d+/g, "").replace("sharp", "#");
     } else {
-        console.error(`Note for key ${key} and octave ${octave} is null or undefined`);
+        // console.error(`Note for key ${key} and octave ${octave} is null or undefined`);
         noteRefined = "";
     }
 
