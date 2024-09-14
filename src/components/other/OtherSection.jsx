@@ -25,7 +25,7 @@ const WhatIsMusicKeyboard = () => {
     return (
         <div>
             <Title title="What is MusicKeyboard.io?" />
-            <div className="flex flex-col text-justify px-24 my-4 items-center">
+            <div className="flex flex-col text-justify mx-auto w-full px-4 max-w-4xl my-4 items-center">
                 <h2>
                     Developed by Jaime Alonso, MusicKeyboard.io is a free online platform where you can play the piano as in the most minimalistic way possible. Whether you're a beginner composer or an experienced musician, my virtual keyboard with realistic piano sound offers an intuitive and interactive way to practice and enjoy music.
                     Benefit from our chords database, notes tracking, and intuitive keymap. Play music online without the need to download any software. Explore various features, including a frequency chart, custom settings for the music keyboard, and a variety of color themes. Play anywhere, anytime!
@@ -130,7 +130,7 @@ const WhyFreqChart = () => {
     return (
         <div className='flex flex-col justify-center items-center mt-12'>
             <Title title="Why a Frequency Chart?" />
-            <div className='flex flex-col text-justify px-24 my-4 text-justify'>
+            <div className='flex flex-col text-justify w-full px-4 max-w-4xl my-4 text-justify'>
                 <h2>
                     The frequency chart is a useful tool to understand the pitch of each note in the piano keyboard. The chart displays the frequency of each note in Hertz (Hz) and its corresponding octave.
                 </h2>

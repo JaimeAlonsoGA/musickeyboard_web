@@ -124,13 +124,13 @@ const Key = ({ note, i }) => {
                         note.white && <PseudoKey note={noteClassic} sounding={sounding.includes(note.id)} theme={theme} />
                     }
                     <div className={`w-4 text-center ${zoom < 10 ? "text-xs" : ""}`}>
-                        <h1 className="text-gray-500">{isNoteNameVisible && (note.white ? noteName : "")}</h1>
-                        {showNoteName && !isNoteNameVisible && sounding.includes(note.id) && (note.white ? noteName : "")}
+                        <h1 className="text-gray-400">{isNoteNameVisible && (note.white ? noteName : "")}</h1>
+                        <h1 className="text-gray-400">{showNoteName && !isNoteNameVisible && sounding.includes(note.id) && (note.white ? noteName : "")}</h1>
                     </div>
-                    {isLgScreen && <div className="absolute mb-48 font-mono text-sm font-bold">
+                    {isLgScreen && <div className="absolute mb-48 font-mono text-xs font-bold">
                         {keymapOnKey && !isPlaying && isKeymapOnKey && note.white && key}
                     </div>}
-                    {isLgScreen && <div className="absolute mb-60 font-mono text-sm text-white font-bold">
+                    {isLgScreen && <div className="absolute mb-60 font-mono text-xs text-white font-bold">
                         {keymapOnKey && !isPlaying && isKeymapOnKey && !note.white && key}
                     </div>}
                 </div>
