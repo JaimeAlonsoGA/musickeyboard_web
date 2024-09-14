@@ -27,7 +27,7 @@ const WhatIsMusicKeyboard = () => {
             <Title title="What is MusicKeyboard.io?" />
             <div className="flex flex-col text-justify px-24 my-4 items-center">
                 <h2>
-                    Developed by Jaime Alonso, MusicKeyboard.io is a free online platform where you can play the piano as in the most minimalistic way possible. Whether you're a beginner composer or an experienced musician, our virtual keyboard with realistic piano sound offers an intuitive and interactive way to practice and enjoy music.
+                    Developed by Jaime Alonso, MusicKeyboard.io is a free online platform where you can play the piano as in the most minimalistic way possible. Whether you're a beginner composer or an experienced musician, my virtual keyboard with realistic piano sound offers an intuitive and interactive way to practice and enjoy music.
                     Benefit from our chords database, notes tracking, and intuitive keymap. Play music online without the need to download any software. Explore various features, including a frequency chart, custom settings for the music keyboard, and a variety of color themes. Play anywhere, anytime!
                 </h2>
                 <div className='flex flex-row mt-12 gap-8'>

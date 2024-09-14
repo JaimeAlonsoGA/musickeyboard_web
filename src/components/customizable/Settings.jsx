@@ -24,7 +24,7 @@ const Settings = () => {
                 {!isSmScreen && <Zoom text="Zoom" min={1} max={30} setter={setZoom} state={zoom} updateVisible={updateVisibleNotes} lock={false} />}
                 <SettingsButton isSettingsVisible={isSettingsVisible} setIsSettingsVisible={setIsSettingsVisible} />
                 {isLgScreen && <Octaver text="Octave" side={2} min={4} max={9} setter={setOctaveRight} setter2={setOctaveLeft} state={octaveRight} middleOctave={setOctaveMiddleRight} middleOctave2={setOctaveMiddleLeft} />}
-                {isSmScreen && <Zoom text="Zoom" min={1} max={30} setter={setZoom} state={zoom} updateVisible={updateVisibleNotes} lock={false} />}
+                {isSmScreen && <Zoom text="Zoom" min={1} max={20} setter={setZoom} state={zoom} updateVisible={updateVisibleNotes} lock={false} />}
             </div>
             {isSettingsVisible && <Customizable />}
         </div>

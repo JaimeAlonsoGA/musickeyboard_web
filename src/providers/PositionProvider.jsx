@@ -59,7 +59,8 @@ export const PositionContextProvider = ({ children }) => {
         keyboardRef.current.addEventListener('scroll', updateVisibleNotes);
         window.addEventListener('resize', updateVisibleNotes);
 
-        updateVisibleNotes(); // Initial check
+        scrollToKey("C5");
+        updateVisibleNotes();
 
         return () => {
             window.removeEventListener('scroll', updateVisibleNotes);

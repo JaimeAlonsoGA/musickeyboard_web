@@ -32,7 +32,6 @@ const Key = ({ note, i }) => {
         }
         if (octave == octaveMiddleLeft || octave == octaveMiddleRight) {
             const refined = note.replace(digitRegex, "2");
-            console.log("note refined" + refined);
             return refined;
         }
         if (octave == octaveRight) {
@@ -73,6 +72,11 @@ const Key = ({ note, i }) => {
                 onend: () => {
                     setIsPlaying(false);
                 },
+                onfade: () => {
+                    console.log("fade completed! for", note.id);
+                    soundRef.current.stop();
+                    setIsPlaying(false);
+                }
             });
         }
 
@@ -80,18 +84,21 @@ const Key = ({ note, i }) => {
 
         if (sounding.includes(note.id)) {
             if (!isPlaying) {
+                console.log("playing sound for", note.id);
+                sound.stop();
                 sound.play();
                 setIsPlaying(true);
                 if (isAutoScroll) AutoScroll(note.id);
             }
         } else if (isPlaying) {
+            console.log("fading out sound for", note.id);
+            sound.fade(1.0, 0.0, 600);
             setIsPlaying(false);
-            // sound.fade(1, 0, 1000);
-            sound.stop();
+            // sound.stop();
         }
         // } else sound.stop();
 
-    }, [sounding, isPlaying]);
+    }, [sounding, isPlaying, note.id]);
 
     return (
         <div className="h-full flex flex-col">

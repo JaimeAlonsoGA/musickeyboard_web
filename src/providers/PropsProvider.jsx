@@ -10,7 +10,7 @@ export const usePropsProvider = () => {
 
 export const PropsContextProvider = ({ children }) => {
     const [isNoteNameVisible, setIsNoteNameVisible] = useState(false);
-    const [zoom, setZoom] = useState(15);
+    const [zoom, setZoom] = useState(10);
     const [isKeymapVisible, setIsKeymapVisible] = useState(false);
     const [isMiniKeyboardVisible, setIsMiniKeyboardVisible] = useState(true);
     const [showNoteName, setShowNoteName] = useState(true);

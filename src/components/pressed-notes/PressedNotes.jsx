@@ -8,7 +8,7 @@ const checkChord = (sounding) => {
     if (sounding.length < 3) return;
     const chordNames = []
     for (let chord of chords) {
-        console.log(chord.notes, sounding);
+        // console.log(chord.notes, sounding);
         if (chord.notes.every((note, i) => {
             const names = sounding.map((instance) => instance.replace(digitRegex, "").replace("sharp", "♯"));
             // console.log("clean", names)
@@ -33,7 +33,7 @@ const PressedNotes = () => {
         <div className="flex flex-col justify-center items-center font-medium">
             <div className="flex flex-row gap-8">
                 {sounding.map((id, i) => notes.find(note => note.id === id)).sort((a, b) => {
-                    console.log(a, b);
+                    // console.log(a, b);
                     return a.index - b.index;
                 }).map((instance, i) => {
                     const note = instance?.name;
