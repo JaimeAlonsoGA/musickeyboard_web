@@ -1,5 +1,5 @@
 **Privacy Policy**
-1. Introduction
+**1. Introduction**
 We respect your privacy and are committed to protecting any personal information you may share with us while using our website. This privacy policy explains how we handle information related to the use of cookies and third-party technologies, such as Google AdSense, to display advertisements on our site.
 
 **2. Information Collection**
