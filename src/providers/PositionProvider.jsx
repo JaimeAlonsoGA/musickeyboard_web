@@ -10,7 +10,7 @@ export const usePositionProvider = () => {
 }
 
 export const PositionContextProvider = ({ children }) => {
-    const [visibleNotes, setVisibleNotes] = useState({ first: null, last: null });
+    const [visibleNotes, setVisibleNotes] = useState({ first: 23, last: null });
     const notesRef = useRef([]);
     const keyboardRef = useRef(null);
     const [isAutoScroll, setIsAutoScroll] = useState(true);
@@ -59,7 +59,7 @@ export const PositionContextProvider = ({ children }) => {
         keyboardRef.current.addEventListener('scroll', updateVisibleNotes);
         window.addEventListener('resize', updateVisibleNotes);
 
-        scrollToKey("C5");
+        AutoScroll("C5");
         updateVisibleNotes();
 
         return () => {

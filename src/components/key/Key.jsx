@@ -93,8 +93,8 @@ const Key = ({ note, i }) => {
         } else if (isPlaying) {
             console.log("fading out sound for", note.id);
             sound.fade(1.0, 0.0, 600);
+            //sound.stop();
             setIsPlaying(false);
-            // sound.stop();
         }
         // } else sound.stop();
 
@@ -127,10 +127,10 @@ const Key = ({ note, i }) => {
                         <h1 className="text-gray-400">{isNoteNameVisible && (note.white ? noteName : "")}</h1>
                         <h1 className="text-gray-400">{showNoteName && !isNoteNameVisible && sounding.includes(note.id) && (note.white ? noteName : "")}</h1>
                     </div>
-                    {isLgScreen && <div className="absolute mb-48 font-mono text-xs font-bold">
+                    {isLgScreen && <div className="text-gray-400 absolute mb-48 font-mono text-xs font-bold">
                         {keymapOnKey && !isPlaying && isKeymapOnKey && note.white && key}
                     </div>}
-                    {isLgScreen && <div className="absolute mb-60 font-mono text-xs text-white font-bold">
+                    {isLgScreen && <div className="text-gray-400 absolute mb-60 font-mono text-xs text-white font-bold">
                         {keymapOnKey && !isPlaying && isKeymapOnKey && !note.white && key}
                     </div>}
                 </div>
